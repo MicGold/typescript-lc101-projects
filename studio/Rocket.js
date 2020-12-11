@@ -9,15 +9,16 @@ var Rocket = /** @class */ (function () {
         this.totalCapacityKg = totalCapacityKg;
     }
     Rocket.prototype.sumMass = function (items) {
-        var sum = 0;
-        for (var i = 0; i < items.length; i++) {
-            sum += items[i].massKg;
-        }
-        return sum;
-        //returns sum of all massKg
+        // let totalMass: number = 0;
+        // items.forEach((item: Payload) => {
+        //    totalMass += item.massKg;
+        // })
+        // return totalMass;
+        return items.reduce(function (acc, cur) { return acc + cur.massKg; }, 0);
     };
     Rocket.prototype.currentMassKg = function () {
         return this.sumMass(this.astronauts) + this.sumMass(this.cargoItems);
+        //return this.sumMass([... this.cargoItems, ... this.astronauts]);
     };
     Rocket.prototype.canAdd = function (item) {
         if (this.currentMassKg() + item.massKg <= this.totalCapacityKg) {
